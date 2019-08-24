@@ -16,7 +16,10 @@ def decode_body(request):
 def post(request):
     if request.method == 'POST':
         citizens = decode_body(request)
-        ds = DataSet.create(citizens['citizens'])
+        try:
+            ds = DataSet.create(citizens['citizens'])
+        except Exception:
+            return HttpResponseBadRequest()
         return JsonResponse({'data': {'import_id': ds}}, status=201)
     else:
         return HttpResponseBadRequest()

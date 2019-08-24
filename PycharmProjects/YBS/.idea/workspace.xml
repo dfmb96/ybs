@@ -28,6 +28,13 @@
   <component name="FavoritesManager">
     <favorites_list name="YBS" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectId" id="1Ol21LHeCW8FZ9nmm8Grkye6Wtt" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -45,6 +52,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/YBS/core/tests" />
       <recent name="$PROJECT_DIR$/YBS/core" />
       <recent name="$PROJECT_DIR$/YBS" />
       <recent name="$PROJECT_DIR$/core" />
@@ -124,7 +132,8 @@
       <workItem from="1563316278443" duration="4680000" />
       <workItem from="1564537664439" duration="17040000" />
       <workItem from="1566296417229" duration="949000" />
-      <workItem from="1566419117946" duration="641000" />
+      <workItem from="1566419117946" duration="887000" />
+      <workItem from="1566648005083" duration="10239000" />
     </task>
     <servers />
   </component>
