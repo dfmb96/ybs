@@ -74,6 +74,23 @@ WRONG_DATE_FORMAT = json.dumps({
     ]
 })
 
+EXTRA_FIELDS = json.dumps({
+    'citizens': [
+        {
+            'citizen_id': 1,
+            'town': 'Moscow',
+            'street': 'Street1',
+            'building': '1',
+            'appartement': 100,
+            'name': 'Name',
+            'birth_date': '20.02.2001',
+            'gender': 'male',
+            'relatives': [],
+            'abc': 'def',
+        },
+    ]
+})
+
 WRONG_DATE = json.dumps({
     'citizens': [
         {
@@ -162,6 +179,7 @@ WRONG_RELATIVES = json.dumps({
 
 WRONG_DATA = [
     WRONG_FIELDS,
+    EXTRA_FIELDS,
     WRONG_DATE_FORMAT,
     WRONG_DATE,
     NULL_DATA,
