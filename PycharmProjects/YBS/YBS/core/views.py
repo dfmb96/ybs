@@ -30,12 +30,30 @@ def patch(request, import_id, citizen_id):
     if request.method == 'PATCH':
         c_id = '{} {}'.format(import_id, citizen_id)
         patch_dict = decode_body(request)
-        if 'relatives' in patch_dict:
-            patch_dict['relatives'] = ' '.join(list(map(str, patch_dict['relatives'])))
         try:
             citizen = Citizen.objects.filter(pk=c_id)
+            if len(citizen) != 1:
+                return HttpResponseBadRequest()
+            if 'relatives' in patch_dict:
+                patch_dict['relatives'] = ' '.join(list(map(str, patch_dict['relatives'])))
+                old_relatives = citizen[0].relatives.split()
+                for relative_id in old_relatives:
+                    rel_id = '{} {}'.format(import_id, relative_id)
+                    relative = Citizen.objects.filter(pk=rel_id)
+                    rel_rels = relative[0].relatives.split()
+                    rel_rels.remove(citizen_id)
+                    rel_rels = ' '.join(rel_rels)
+                    relative.update(relatives=rel_rels)
+                new_rels = patch_dict['relatives']
+                for relative_id in new_rels:
+                    rel_id = '{} {}'.format(import_id, relative_id)
+                    relative = Citizen.objects.filter(pk=rel_id)
+                    rel_rels = relative[0].relatives.split()
+                    rel_rels.append(citizen_id)
+                    rel_rels = ' '.join(rel_rels)
+                    relative.update(relatives=rel_rels)
             citizen.update(**patch_dict)
-        except Exception:
+        except Exception as e:
             return HttpResponseBadRequest()
         citizen_dict = citizen.values()[0]
         citizen_dict['citizen_id'] = int(citizen_dict['citizen_id'].split()[-1])
@@ -49,7 +67,10 @@ def patch(request, import_id, citizen_id):
 @csrf_exempt
 def get_citizens(request, import_id):
     if request.method == 'GET':
-        citizens = Citizen.objects.filter(dataset_id=int(import_id)).values()
+        try:
+            citizens = Citizen.objects.filter(dataset_id=int(import_id)).values()
+        except Exception:
+            return HttpResponseBadRequest()
         citizens_list = []
         for citizen in citizens:
             citizen['citizen_id'] = int(citizen['citizen_id'].split()[-1])
@@ -65,7 +86,10 @@ def get_citizens(request, import_id):
 def get_presents(request, import_id):
     if request.method == 'GET':
         data = {i: [] for i in range(1, 13)}
-        citizens = Citizen.objects.filter(dataset_id=int(import_id))
+        try:
+            citizens = Citizen.objects.filter(dataset_id=int(import_id))
+        except Exception:
+            return HttpResponseBadRequest()
         citizens_dict = {}
         for citizen in citizens:
             inner_id = citizen.citizen_id.split()[-1]
@@ -104,7 +128,10 @@ def get_age_from_birth_date(citizen):
 
 def get_percentile(request, import_id):
     if request.method == 'GET':
-        citizens = Citizen.objects.filter(dataset_id=int(import_id))
+        try:
+            citizens = Citizen.objects.filter(dataset_id=int(import_id))
+        except Exception:
+            return HttpResponseBadRequest()
         ages_by_towns = {}
         for citizen in citizens:
             town = citizen.town

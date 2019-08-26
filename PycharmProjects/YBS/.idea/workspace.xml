@@ -48,6 +48,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
@@ -133,7 +134,7 @@
       <workItem from="1564537664439" duration="17040000" />
       <workItem from="1566296417229" duration="949000" />
       <workItem from="1566419117946" duration="887000" />
-      <workItem from="1566648005083" duration="10239000" />
+      <workItem from="1566648005083" duration="18810000" />
     </task>
     <servers />
   </component>
